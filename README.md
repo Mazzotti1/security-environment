@@ -14,10 +14,10 @@ Um container Docker com as ferramentas que eu uso para análise de segurança de
 🛠️ Scripts Personalizados
 Todos os scripts estão localizados em /app/scripts/:
 
-sign-apk.sh - Assinar APK com keystore padrão
-unsign-apk.sh - Remover assinatura de APK
-start-proxy-chain.sh - Iniciar cadeia de proxies
-convert-cert.sh - Converter formatos de certificado
+- sign-apk.sh - Assinar APK com keystore padrão
+- unsign-apk.sh - Remover assinatura de APK
+- start-proxy-chain.sh - Iniciar cadeia de proxies
+- convert-cert.sh - Converter formatos de certificado
 
 ## 🔧 Comandos Disponíveis
 
@@ -44,10 +44,10 @@ convert-cert.sh - Converter formatos de certificado
 | `burpsuite`    | Iniciar Burp Suite               |
 | `start-tor`    | Iniciar Tor Browser              |
 
-💡 Dicas
-Para usar ferramentas gráficas, certifique-se de ter um servidor X11 em execução
-Para melhor performance com Genymotion, passe --device /dev/kvm e --privileged
-Os scripts podem ser modificados em /app/scripts/ conforme necessário
+## 💡 Dicas
+- Para usar ferramentas gráficas, certifique-se de ter um servidor X11 em execução
+- Para melhor performance com Genymotion, passe --device /dev/kvm e --privileged
+- Os scripts podem ser modificados em /app/scripts/ conforme necessário
 
 ## 📦 Ferramentas Incluídas
 
@@ -79,19 +79,18 @@ Os scripts podem ser modificados em /app/scripts/ conforme necessário
 - **x11vnc** (para acesso gráfico remoto)
 - **Utilitários**: `curl`, `wget`, `git`, `python3`, `pip`, `net-tools`, `gnupg`, etc.
 
-🔐 Credenciais Padrão
-Keystore:
+## 🔐 Credenciais Padrão
+## Keystore:
+- `Caminho:` /app/apk-signers/keys/keystore.jks
+- `Senha:` android
+- `Alias:` androiddebugkey
 
-Caminho: /app/apk-signers/keys/keystore.jks
-Senha: android
-Alias: androiddebugkey
+## 🌐 Portas Expostas
+- `1080`: SOCKS proxy  
+- `8118`: Privoxy  
+- `3128`: Squid  
+- `9050`: Tor
 
-🌐 Portas Expostas
-1080: SOCKS proxy
-8118: Privoxy
-3128: Squid
-9050: Tor
-
-📄 Licença
+## 📄 Licença
 Este projeto é para fins educacionais e de pesquisa. Verifique as licenças individuais de cada ferramenta incluída.
 
