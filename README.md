@@ -19,6 +19,23 @@ Todos os scripts estão localizados em /app/scripts/:
 - start-proxy-chain.sh - Iniciar cadeia de proxies
 - convert-cert.sh - Converter formatos de certificado
 
+### 1. Clone o repositório
+
+git clone https://github.com/Mazzotti1/security-ambient.git
+- `cd security-ambient`
+- `docker build -t android-env .`
+
+## Opção Básica
+- `docker run -it --rm android-env`
+
+## Opção Completa (com suporte a GUI e dispositivos):
+- `docker run -it --rm \
+  --network host \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -e DISPLAY=$DISPLAY \
+  --device /dev/kvm \
+  --privileged \
+  android-env`
 ## 🔧 Comandos Disponíveis
 
 ### 🧰 Ferramentas Principais
