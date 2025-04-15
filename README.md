@@ -29,14 +29,7 @@ git clone https://github.com/Mazzotti1/security-ambient.git
 - `docker run -it --rm sec-android-env`
 
 ## Opção Completa (com suporte a GUI e dispositivos):
-- `docker run -it --rm \
-  --net host \
-  --privileged \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -e DISPLAY=$DISPLAY \
-  -v $(pwd)/workspace:/app/workspace \
-  --name android-env \
-  sec-android-env`
+- `docker run -it --rm --net host --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -v "$(pwd)/workspace:/app/workspace" --name sec-android-env sec-android-env`
 ## 🔧 Comandos Disponíveis
 
 ### 🧰 Ferramentas Principais
