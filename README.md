@@ -23,19 +23,20 @@ Todos os scripts estão localizados em /app/scripts/:
 
 git clone https://github.com/Mazzotti1/security-ambient.git
 - `cd security-ambient`
-- `docker build -t android-env .`
+- `docker build -t sec-android-env .`
 
 ## Opção Básica
-- `docker run -it --rm android-env`
+- `docker run -it --rm sec-android-env`
 
 ## Opção Completa (com suporte a GUI e dispositivos):
 - `docker run -it --rm \
-  --network host \
+  --net host \
+  --privileged \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -e DISPLAY=$DISPLAY \
-  --device /dev/kvm \
-  --privileged \
-  android-env`
+  -v $(pwd)/workspace:/app/workspace \
+  --name android-env \
+  sec-android-env`
 ## 🔧 Comandos Disponíveis
 
 ### 🧰 Ferramentas Principais
@@ -103,9 +104,9 @@ git clone https://github.com/Mazzotti1/security-ambient.git
 - `Alias:` androiddebugkey
 
 ## 🌐 Portas Expostas
-- `1080`: SOCKS proxy  
-- `8118`: Privoxy  
-- `3128`: Squid  
+- `1080`: SOCKS proxy
+- `8118`: Privoxy
+- `3128`: Squid
 - `9050`: Tor
 
 ## 📄 Licença
