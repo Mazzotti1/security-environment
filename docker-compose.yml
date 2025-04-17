@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  android-tools:
+    build: .
+    container_name: android-tools-container
+    image: android-tools-image
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.X11-unix/X0
+      - PULSE_SERVER=unix:/tmp/pulseaudio.socket
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XAUTHORITY}:/tmp/.X11-unix/X0:ro
+      - ./data:/data
+      - ./tools:/tools
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./apks:/apks
+      - ./scripts:/app/scripts
+    ports:
+      - "8080:8080"        # Burp Suite
+      - "8000:8000"        # MobSF
+      - "9050:9050"        # Tor
+      - "8118:8118"        # Privoxy
+      - "3128:3128"        # Squid
+      - "5037:5037"        # ADB
+      - "5554-5555:5554-5555" # Genymotion emulator ports
+    cap_add:
+      - NET_ADMIN
+    command: ["--install-all"]
