@@ -5,12 +5,6 @@
 
 Um container Docker com as ferramentas que eu uso para análise de segurança de aplicativos Android, incluindo ferramentas para engenharia reversa, manipulação de APKs e testes de penetração.
 
-### Pré-requisitos
-- Docker instalado
-- 8GB+ de RAM recomendado
-- KVM habilitado para Genymotion
-
-
 🛠️ Scripts Personalizados
 Todos os scripts estão localizados em /app/scripts/:
 
