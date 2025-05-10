@@ -1,0 +1,17 @@
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y proxychains curl iputils-ping tor privoxy squid && \
+    apt-get clean
+
+COPY tools/proxy-chain/torrc /etc/tor/torrc
+COPY tools/proxy-chain/privoxy.conf /etc/privoxy/config
+COPY tools/proxy-chain/squid.conf /etc/squid/squid.conf
+
+COPY tools/scripts/start-proxy-chain.sh /usr/local/bin/start-proxy-chain.sh
+
+RUN chmod +x /usr/local/bin/start-proxy-chain.sh
+
+CMD ["/bin/bash", "-c", "/usr/local/bin/start-proxy-chain.sh"]

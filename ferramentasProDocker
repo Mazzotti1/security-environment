@@ -1,0 +1,47 @@
+
+# Função para instalar o APK Signer
+install_apksigner() {
+    if [ ! -f "/app/apk-signers/uber-apk-signer/uber-apk-signer.jar" ]; then
+        echo "[*] Instalando Uber APK Signer..."
+        mkdir -p /app/apk-signers/uber-apk-signer
+        curl -L -o /app/apk-signers/uber-apk-signer/uber-apk-signer.jar \
+          https://github.com/patrickfav/uber-apk-signer/releases/download/v1.3.0/uber-apk-signer-1.3.0.jar
+
+        cat <<EOF > /usr/local/bin/uber-apk-signer
+#!/bin/sh
+java -jar /app/apk-signers/uber-apk-signer/uber-apk-signer.jar "\$@"
+EOF
+        chmod +x /usr/local/bin/uber-apk-signer
+
+        echo "[*] Criando keystore padrão..."
+        mkdir -p /app/apk-signers/keys
+        keytool -genkey -v -keystore /app/apk-signers/keys/keystore.jks \
+          -keyalg RSA -keysize 2048 -validity 10000 \
+          -alias androiddebugkey \
+          -storepass android -keypass android \
+          -dname "CN=Android Debug,O=Android,C=US"
+
+        echo "export UBER_SIGNER_PATH=/app/apk-signers/uber-apk-signer/uber-apk-signer.jar" >> ~/.bashrc
+        echo "export KEYSTORE_PATH=/app/apk-signers/keys/keystore.jks" >> ~/.bashrc
+        echo "export KEYSTORE_PASS=android" >> ~/.bashrc
+        echo "export KEY_ALIAS=androiddebugkey" >> ~/.bashrc
+        echo "export KEY_PASS=android" >> ~/.bashrc
+    else
+        echo "[*] Uber APK Signer já está instalado"
+    fi
+}
+
+
+# Função para instalar o MobSF
+install_mobsf() {
+    if [ ! -d "/opt/mobsf" ]; then
+        echo "[*] Clonando MobSF..."
+        git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git /opt/mobsf
+        cd /opt/mobsf
+        echo "[*] Instalando dependências do MobSF..."
+        pip3 install -r requirements.txt
+        echo "alias start-mobsf='cd /opt/mobsf && python3 manage.py runserver 0.0.0.0:8000'" >> ~/.bashrc
+    else
+        echo "[*] MobSF já está instalado em /opt/mobsf"
+    fi
+}
